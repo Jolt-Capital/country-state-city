@@ -28,13 +28,18 @@ export interface IState {
 	getStateByCodeAndCountry?(): IState;
 	getStateByCode?(): IState;
 }
+
+// TODO configure linter to avoid this false positive erros
+/* eslint-disable no-unused-vars */
 export interface ICity {
 	name: string;
 	countryCode: string;
 	stateCode: string;
 	latitude?: string | null;
 	longitude?: string | null;
-	getAllCities?(): ICity[];
-	getCitiesOfState?(): ICity[];
-	getCitiesOfCountry?(): ICity[];
+	getAllCities(): ICity[];
+	getCitiesOfState(countryCode: string, stateCode: string): ICity[];
+	getCitiesOfCountry(countryCode: string): ICity[] | undefined;
+	lookupCity(cityToLookup: ICity['name'], country?: ICountry['isoCode']): ICity[] | undefined;
 }
+/* eslint-enable no-unused-vars */
